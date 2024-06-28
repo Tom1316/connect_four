@@ -1,7 +1,7 @@
 // This file contains helper code beyond the first week 'Intro to JavaScript' course content.
 // You should not have to make any changes in this file to get your game working.
 
-import { Player, Cell, getBoard, setBoard } from './board'
+import { Player, Cell, getBoard, setBoard, drawBoard, settings } from './board'
 
 import { checkWinner, crossText, getCurrentPlayer, getGameOver, noughtText, resetGame, setCurrentPlayer, switchPlayer, takeTurn, nobodyText } from './academy'
 
@@ -10,10 +10,12 @@ const winnerDisplay = document.getElementById('winner-display')!
 const validCellValues: Cell[] = [noughtText, crossText, null]
 const validWinValues: Cell[] = [noughtText, crossText, nobodyText]
 
+drawBoard();
+
 // Clear down the elements drawn on the board.
 function clearHtmlGrid() {
-  for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
-    for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
+  for (let rowIndex = 0; rowIndex < settings.boardWidth; rowIndex++) {
+    for (let columnIndex = 0; columnIndex < settings.boardLength; columnIndex++) {
       document.getElementById(`row-${rowIndex}-column-${columnIndex}`)!.innerHTML = ''
     }
   }
@@ -21,9 +23,10 @@ function clearHtmlGrid() {
 
 function populateHtmlGridWithBoardState(board: Cell[][]) {
   console.log('populateHtmlGridWithBoardState was called with', board)
+  
   clearHtmlGrid()
-  for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
-    for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
+  for (let rowIndex = 0; rowIndex < settings.boardWidth; rowIndex++) {
+    for (let columnIndex = 0; columnIndex < settings.boardLength; columnIndex++) {
       if (!board[rowIndex][columnIndex]) {
         continue
       }
@@ -34,7 +37,7 @@ function populateHtmlGridWithBoardState(board: Cell[][]) {
 }
 
 function isValidRowOrColumn(arrayOfCells: Cell[]) {
-  return Array.isArray(arrayOfCells) && arrayOfCells.length === 3
+  return Array.isArray(arrayOfCells) && arrayOfCells.length === 6
 }
 
 function isValidColumn(columnArray: Cell[]) {
@@ -73,8 +76,8 @@ function resetClick(event: any) {
 }
 
 // Bind the click events for the grid.
-for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
-  for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
+for (let rowIndex = 0; rowIndex < settings.boardWidth; rowIndex++) {
+  for (let columnIndex = 0; columnIndex < settings.boardLength; columnIndex++) {
     const gridPosition = document.getElementById(`row-${rowIndex}-column-${columnIndex}`)!
     gridPosition.addEventListener('click', positionClick.bind(null, rowIndex, columnIndex))
   }
