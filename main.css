@@ -1,6 +1,6 @@
 .column {
-    width: 100px;
-    height: 100px;
+    width: 160px;
+    height: 110px;
     margin: 0px;
     border: 2px black solid;
     display: flex;
@@ -10,7 +10,7 @@
 }
 
 .row {
-    width: 800px;
+    width: 1700px;
     margin: 0px auto;
     display: flex;
     justify-content: center;

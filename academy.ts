@@ -1,7 +1,7 @@
 //
 // Make your changes to store and update game state in this file
 
-import { Player, Cell, getBoard, setBoard } from './board'
+import { Player, Cell, getBoard, setBoard, settings, boardBuilder } from './board'
 
 export const noughtText = 'nought'
 export const crossText = 'cross'
@@ -9,7 +9,6 @@ export const nobodyText = 'nobody'
 
 let currentGameOver = false
 let currentPlayer:any = undefined
-
 
 // Take the row and column number and update the game state.
 export function takeTurn(rowIndex: number, columnIndex: number,
@@ -45,11 +44,8 @@ export function switchPlayer(currentPlayer: Player): Player {
 // Otherwise return null to continue playing.
 export function checkWinner(currentBoard: Cell[][]): Player {
 
-//assumes n*n shape board
-const n = currentBoard.length
-
 //check rows and columns
-for (let i = 0; i <n; i++){
+for (let i = 0; i <settings.boardRows; i++){
 
   //check row 
   if(currentBoard[i].every(cell => cell === currentBoard[i][0]&& cell !== null)){
@@ -58,7 +54,7 @@ for (let i = 0; i <n; i++){
    
  // check column 
   let columnWin = true;
-  for (let j = 0; j < n; j++) {
+  for (let j = 0; j < settings.boardCols; j++) {
       if (currentBoard[j][i] !== currentBoard[0][i] || currentBoard[j][i] === null) {
           columnWin = false;
           break;
@@ -71,7 +67,7 @@ for (let i = 0; i <n; i++){
   
 // check main diagonal win
 let mainDiagonalWin = true;
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < settings.boardRows; i++) {
       if (currentBoard[i][i] !== currentBoard[0][0] || currentBoard[i][i] === null) {
           mainDiagonalWin = false;
           break;
@@ -84,14 +80,14 @@ let mainDiagonalWin = true;
 
 //check anti-diag
 let antiDiagonalWin = true;
-  for (let i = 0; i < n; i++) {
-      if (currentBoard[i][n - 1 - i] !== currentBoard[0][n - 1] || currentBoard[i][n - 1 - i] === null) {
+  for (let i = 0; i < settings.boardRows; i++) {
+      if (currentBoard[i][settings.boardRows - 1 - i] !== currentBoard[0][settings.boardRows - 1] || currentBoard[i][settings.boardRows - 1 - i] === null) {
           antiDiagonalWin = false
            break
       }
   }
   if (antiDiagonalWin) {
-      return currentBoard[0][n - 1] as Player;
+      return currentBoard[0][settings.boardRows - 1] as Player;
   }
 
 // check for null
@@ -106,7 +102,7 @@ let antiDiagonalWin = true;
 
 // Set the game state back to its original state to play another game.
 export function resetGame() {
-  setBoard([[null, null, null], [null, null, null], [null, null, null]])
+  setBoard(boardBuilder())
   currentPlayer = "cross"
   console.log('resetGame was called') // keep this line here
 }

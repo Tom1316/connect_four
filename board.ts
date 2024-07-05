@@ -4,20 +4,37 @@ export type Player = 'nought' | 'cross' | 'nobody' | undefined
 export type Cell = number | Player | null
 
 export class Settings{
-  boardWidth:number=7;
-  boardLength:number=6;
+  boardRows:number=6;
+  boardCols:number=7;
 }
 
 export const settings = new Settings()
 
 
+// build initial board
 let board:Cell[][] =[]
- for(let row = 0; row < settings.boardWidth; row++){
-  let row = null
-  for(let col = 0; col< settings.boardLength; col++){
-    let col = null
+ for(let col = 0; col < settings.boardCols; col++){
+  let col:null[] = [] //initialise the inner array
+  for(let row = 0; row< settings.boardRows; row++){
+    col[row] = null
   }
+  board.push(col)
  }
+
+console.log(board)
+
+//function to build board
+export function boardBuilder(): Cell[][] {
+  let board:Cell[][] =[]
+  for(let col = 0; col < settings.boardCols; col++){
+    let col:null[] = [] //initialise the inner array
+    for(let row = 0; row< settings.boardRows; row++){
+      col[row] = null
+    }
+    board.push(col)
+  }
+  return board
+}
 
 // Return the current board state with either a noughtText or a crossText in
 // each position. Put a null in a position that hasn't been played yet.
@@ -37,12 +54,12 @@ export function setBoard(newBoard: Cell[][]) {
 export function drawBoard(){ 
   const grid = document.getElementById("grid")
 
-  for (let row = 0; row< settings.boardWidth; row ++){
+  for (let row = 0; row< settings.boardRows; row ++){
     let rowElement = document.createElement("div");
     rowElement.id = `row-${row}`;
     rowElement.className = "row"
 
-    for (let column = 0; column < settings.boardLength; column ++){
+    for (let column = 0; column < settings.boardCols; column ++){
       let columnElement = document.createElement("div");
       columnElement.id = `row-${row}-column-${column}`;
       columnElement.className = "column"
@@ -52,3 +69,6 @@ export function drawBoard(){
   }
 
 }
+
+
+
