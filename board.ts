@@ -10,25 +10,22 @@ export class Settings{
 
 export const settings = new Settings()
 
-
 // build initial board
 let board:Cell[][] =[]
  for(let col = 0; col < settings.boardCols; col++){
   let col:null[] = [] //initialise the inner array
-  for(let row = 0; row< settings.boardRows; row++){
+  for(let row = 0; row < settings.boardRows; row++){
     col[row] = null
   }
   board.push(col)
  }
-
 console.log(board)
 
-//function to build board
 export function boardBuilder(): Cell[][] {
   let board:Cell[][] =[]
   for(let col = 0; col < settings.boardCols; col++){
     let col:null[] = [] //initialise the inner array
-    for(let row = 0; row< settings.boardRows; row++){
+    for(let row = 0; row < settings.boardRows; row++){
       col[row] = null
     }
     board.push(col)
@@ -36,21 +33,17 @@ export function boardBuilder(): Cell[][] {
   return board
 }
 
-// Return the current board state with either a noughtText or a crossText in
-// each position. Put a null in a position that hasn't been played yet.
-
-//retrieve the board
 export function getBoard(): Cell[][] {
   console.log('getBoard was called')
 return board
 }
 
-//overwrite board with new board
 export function setBoard(newBoard: Cell[][]) {
   board = newBoard
   console.log('setBoard was called')
 }
 
+//draw board in html
 export function drawBoard(){ 
   const grid = document.getElementById("grid")
 

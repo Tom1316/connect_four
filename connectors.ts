@@ -10,10 +10,9 @@ const winnerDisplay = document.getElementById('winner-display')!
 const validCellValues: Cell[] = [noughtText, crossText, null]
 const validWinValues: Cell[] = [noughtText, crossText, nobodyText]
 
-// Create board
+// Create board in html
 drawBoard();
 
-// Clear down the elements drawn on the board.
 function clearHtmlGrid() {
   for (let columnIndex = 0; columnIndex < settings.boardCols; columnIndex++){
     for (let rowIndex = 0; rowIndex < settings.boardRows; rowIndex++) {
@@ -21,7 +20,6 @@ function clearHtmlGrid() {
     }
   }
 }
-
 
 function populateHtmlGridWithBoardState(board: Cell[][]) {
   console.log('populateHtmlGridWithBoardState was called with', board)
@@ -37,17 +35,14 @@ function populateHtmlGridWithBoardState(board: Cell[][]) {
     }
   }
 }
-//connect four has six rows
+
+//checks board dimensions are valid for rows (connect 4 has six rows)
 function isValidRow(arrayOfCells: Cell[]) {
   let result = Array.isArray(arrayOfCells) && arrayOfCells.length === settings.boardRows
-  //console.log(`isValidRow == ${result}`)
-  //console.log(`length == ${arrayOfCells.length} and board with rows == ${settings.boardRows}`)
   return result
 }
-//connect four has seven cols
-
+//checks board dimensions are valid for cols (connect 4 has 7 cols)
 function isValidColumn(columnArray: Cell[]) {
-
   function transposeArray(array: Cell[][]): Cell[][] {
     //initialised 2d array with swapped dimension
     let transposed: Cell[][] = [];
@@ -61,19 +56,13 @@ function isValidColumn(columnArray: Cell[]) {
           }
          return transposed
         }
-
   let transposed = transposeArray(getBoard())
-
-  console.log(transposed)
-  console.log(`transposed array has length of: ${transposed[0].length}`)
-  console.log(settings.boardCols)
 
   return Array.isArray(columnArray) && transposed[0].length === settings.boardCols
         && columnArray.every(function (item) {return validCellValues.includes(item)})
 }
 
 // A grid position was clicked call the game's turn function, redraw and then check for a winner.
-
 function positionClick(row: number, column: number) {
   console.log(`positionClick was called with rowIndex=${row}, columnIndex=${column},`)
   //row, column, currentGameOver, currentBoard, currentPlayer
@@ -86,13 +75,13 @@ function positionClick(row: number, column: number) {
     throw `Expecting "getBoard" to return a 2d array where all values are one of the strings ${validCellValues}. Actually received: ${JSON.stringify(board)}`
   }
 
-
   populateHtmlGridWithBoardState(board)
   const winner = checkWinner(board)
   if (winner) {
     if (typeof winner !== 'string' || !validWinValues.includes(winner)) {
       throw `Expecting "checkWinner" to return null or one of the strings ${validWinValues}. Actually received: ${winner}`
     }
+    console.log("there is a winner")
     winnerName.innerText = winner
     winnerDisplay.style.display = 'block'
   }
