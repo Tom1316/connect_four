@@ -78,8 +78,8 @@ export function checkWinner(currentBoard: Cell[][]): Player {
 
 
 //diag win
-    for (let r = 4; r < rows; r++) {
-      for (let c = 0; c < cols - 4; c++) {
+    for (let r = 3; r < rows; r++) {
+      for (let c = 0; c < cols - 3; c++) {
           if (currentBoard[r][c] == currentBoard[r - 1][c + 1] &&
               currentBoard[r - 1][c + 1] == currentBoard[r - 2][c + 2] &&
               currentBoard[r - 2][c + 2] == currentBoard[r - 3][c + 3] &&
