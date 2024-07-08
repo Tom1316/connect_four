@@ -12,18 +12,25 @@ let currentPlayer:Player = undefined
 // Take the row and column number and update the game state.
 export function takeTurn(rowIndex: number, columnIndex: number,
   currentGameOver: boolean, currentBoard: Cell[][], currentPlayer: Player): Cell[][] {
-
-    if (currentBoard[rowIndex][columnIndex] != null){
+    
+    function gravity(columnIndex:number, currentPlayer:Player, currentBoard:Cell[][]){
+      for (let row = settings.boardRows - 1; row >= 0; row--) {
+        if (currentBoard[row][columnIndex] == null) {
+          currentBoard[row][columnIndex] = currentPlayer
+          break
+        }
+      }
       return currentBoard
     }
-    
-    else if
-    (currentGameOver == false){ 
-      currentBoard[rowIndex][columnIndex] = currentPlayer
-    }
   
-  console.log(`takeTurn was called with row: ${rowIndex}, column: ${columnIndex}`) // keep this line 
-  return currentBoard
+    console.log(`takeTurn was called with row: ${rowIndex}, column: ${columnIndex}`) // keep this line
+  
+    // Only apply gravity if the game is not over and the selected column is valid
+    if (!currentGameOver && currentBoard[0][columnIndex] == null) {
+      currentBoard = gravity(columnIndex, currentPlayer, currentBoard)
+    }
+    
+    return currentBoard
   }
 
 // Switches and sets player to alternate between "nought" and "cross"

@@ -13,6 +13,20 @@ const validWinValues: Cell[] = [noughtText, crossText, nobodyText]
 // Create board in html
 drawBoard();
 
+function transposeArray(array: Cell[][]): Cell[][] {
+  //initialised 2d array with swapped dimension
+  let transposed: Cell[][] = [];
+      // Iterate through the rows of the original array
+      for (let row = 0; row < array[0].length; row++) {
+        transposed[row] = [];
+        for (let col = 0; col < array.length; col++) {
+            // Assign the value to the transposed array
+            transposed[row][col] = array[col][row];
+          }
+        }
+       return transposed
+      }
+
 function clearHtmlGrid() {
   for (let rowIndex = 0; rowIndex < settings.boardRows; rowIndex++){
     for (let colIndex = 0; colIndex < settings.boardCols; colIndex++) {
@@ -44,21 +58,7 @@ function isValidRow(arrayOfCells: Cell[]) {
 }
 
 function isValidColumn(columnArray: Cell[]) {
-  function transposeArray(array: Cell[][]): Cell[][] {
-    //initialised 2d array with swapped dimension
-    let transposed: Cell[][] = [];
-        // Iterate through the rows of the original array
-        for (let row = 0; row < array[0].length; row++) {
-          transposed[row] = [];
-          for (let col = 0; col < array.length; col++) {
-              // Assign the value to the transposed array
-              transposed[row][col] = array[col][row];
-            }
-          }
-         return transposed
-        }
   let transposed = transposeArray(getBoard())
-
   return Array.isArray(columnArray) && transposed[0].length === settings.boardRows
         && columnArray.every(function (item) {return validCellValues.includes(item)})
 }
