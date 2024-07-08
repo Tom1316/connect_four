@@ -21,17 +21,6 @@ let board:Cell[][] =[]
  }
  console.log(board)
 
-
-// let board:Cell[][] =[]
-//  for(let col = 0; col < settings.boardCols; col++){
-//   let col:null[] = [] //initialise the inner array
-//   for(let row = 0; row < settings.boardRows; row++){
-//     col[row] = null
-//   }
-//   board.push(col)
-//  }
-// console.log(board)
-
 export function boardBuilder(): Cell[][] {
   let board:Cell[][] =[]
   for(let row = 0; row < settings.boardRows; row++){

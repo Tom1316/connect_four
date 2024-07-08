@@ -49,7 +49,6 @@ export function checkWinner(currentBoard: Cell[][]): Player {
 
   // row win  
   for (let r = 0; r < rows; r++) {
-    // console.log(`checking rows ${r}`)
     for (let c = 0; c < cols; c++) {
         if (currentBoard[r][c] == currentBoard[r][c + 1] &&
             currentBoard[r][c + 1] == currentBoard[r][c + 2] &&
@@ -72,7 +71,6 @@ export function checkWinner(currentBoard: Cell[][]): Player {
         }
     }
 
-
 //diag win
     for (let r = 3; r < rows; r++) {
       for (let c = 0; c < cols - 3; c++) {
@@ -85,7 +83,19 @@ export function checkWinner(currentBoard: Cell[][]): Player {
       }
   }
 
-  console.log("checkWinner was called")
+    //anti-diag win
+    for (let r = 0; r < rows-3; r++) {
+      for (let c = 0; c < cols; c++) {
+          if (currentBoard[r][c] == currentBoard[r + 1][c + 1] &&
+              currentBoard[r + 1][c + 1] == currentBoard[r + 2][c + 2] &&
+              currentBoard[r + 2][c + 2] == currentBoard[r + 3][c + 3] &&
+              currentBoard[r][c] != null) {
+              return currentBoard[r][c] as Player;
+          }
+      }
+  }
+
+console.log("checkWinner was called")
 }
 
 // Set the game state back to its original state to play another game.

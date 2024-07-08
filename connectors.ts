@@ -21,14 +21,6 @@ function clearHtmlGrid() {
   }
 }
 
-// function clearHtmlGrid() {
-//   for (let columnIndex = 0; columnIndex < settings.boardCols; columnIndex++){
-//     for (let rowIndex = 0; rowIndex < settings.boardRows; rowIndex++) {
-//       document.getElementById(`row-${rowIndex}-column-${columnIndex}`)!.innerHTML = ''
-//     }
-//   }
-// }
-
 function populateHtmlGridWithBoardState(board: Cell[][]) {
   console.log('populateHtmlGridWithBoardState was called with', board)
   
@@ -45,7 +37,7 @@ function populateHtmlGridWithBoardState(board: Cell[][]) {
   }
 }
 
-//checks board dimensions are valid for rows (connect 4 has six rows and seven cols)
+//checks board dimensions are valid for rows and cols (connect 4 has six rows and seven cols)
 function isValidRow(arrayOfCells: Cell[]) {
   let result = Array.isArray(arrayOfCells) && arrayOfCells.length === settings.boardCols
   return result
