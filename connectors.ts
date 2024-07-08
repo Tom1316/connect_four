@@ -45,18 +45,12 @@ function populateHtmlGridWithBoardState(board: Cell[][]) {
   }
 }
 
-
-
-//checks board dimensions are valid for rows (connect 4 has six rows)
+//checks board dimensions are valid for rows (connect 4 has six rows and seven cols)
 function isValidRow(arrayOfCells: Cell[]) {
   let result = Array.isArray(arrayOfCells) && arrayOfCells.length === settings.boardCols
   return result
 }
 
-let testBoard= boardBuilder()
-console.log(isValidRow(testBoard[0]))
-
-//checks board dimensions are valid for cols (connect 4 has 7 cols)
 function isValidColumn(columnArray: Cell[]) {
   function transposeArray(array: Cell[][]): Cell[][] {
     //initialised 2d array with swapped dimension
@@ -73,7 +67,7 @@ function isValidColumn(columnArray: Cell[]) {
         }
   let transposed = transposeArray(getBoard())
 
-  return Array.isArray(columnArray) && transposed[0].length === settings.boardCols
+  return Array.isArray(columnArray) && transposed[0].length === settings.boardRows
         && columnArray.every(function (item) {return validCellValues.includes(item)})
 }
 
