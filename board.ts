@@ -12,23 +12,34 @@ export const settings = new Settings()
 
 // build initial board
 let board:Cell[][] =[]
- for(let col = 0; col < settings.boardCols; col++){
-  let col:null[] = [] //initialise the inner array
-  for(let row = 0; row < settings.boardRows; row++){
-    col[row] = null
+ for(let row = 0; row < settings.boardRows; row++){
+  let row:null[] = [] //initialise the inner array
+  for(let col = 0; col < settings.boardCols; col++){
+    row[col] = null
   }
-  board.push(col)
+  board.push(row)
  }
-console.log(board)
+ console.log(board)
+
+
+// let board:Cell[][] =[]
+//  for(let col = 0; col < settings.boardCols; col++){
+//   let col:null[] = [] //initialise the inner array
+//   for(let row = 0; row < settings.boardRows; row++){
+//     col[row] = null
+//   }
+//   board.push(col)
+//  }
+// console.log(board)
 
 export function boardBuilder(): Cell[][] {
   let board:Cell[][] =[]
-  for(let col = 0; col < settings.boardCols; col++){
-    let col:null[] = [] //initialise the inner array
-    for(let row = 0; row < settings.boardRows; row++){
-      col[row] = null
-    }
-    board.push(col)
+  for(let row = 0; row < settings.boardRows; row++){
+   let row:null[] = [] //initialise the inner array
+   for(let col = 0; col < settings.boardCols; col++){
+     row[col] = null
+   }
+   board.push(row)
   }
   return board
 }

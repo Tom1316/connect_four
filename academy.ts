@@ -47,8 +47,6 @@ export function checkWinner(currentBoard: Cell[][]): Player {
   const rows = settings.boardRows
   const cols = settings.boardCols
 
-  
-
   // row win  
   for (let r = 0; r < rows; r++) {
     // console.log(`checking rows ${r}`)
@@ -64,9 +62,7 @@ export function checkWinner(currentBoard: Cell[][]): Player {
 
 // col win
     for (let c = 0; c < cols; c++) {
-      console.log(`checking cols ${c}`)
         for (let r = 0; r < rows-3; r++) {
-          console.log(`checking rows ${r}`)
             if (currentBoard[r][c] == currentBoard[r+1][c] &&
                 currentBoard[r + 1][c] == currentBoard[r + 2][c]&&
                 currentBoard[r + 2][c] == currentBoard[r + 3][c] &&
@@ -88,8 +84,6 @@ export function checkWinner(currentBoard: Cell[][]): Player {
           }
       }
   }
-
-
 
   console.log("checkWinner was called")
 }
